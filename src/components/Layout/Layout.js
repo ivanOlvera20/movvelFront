@@ -1,24 +1,22 @@
-import React from 'react';
-import {
-  Route, Switch, Redirect, withRouter,
-} from 'react-router-dom';
-import classnames from 'classnames';
+import React from "react";
+import { Route, Switch, withRouter } from "react-router-dom";
+import classnames from "classnames";
 
 // styles
-import useStyles from './styles';
+import useStyles from "./styles";
 
 // components
-import Header from '../Header';
-import Sidebar from '../Sidebar';
+import Header from "../Header";
+import Sidebar from "../Sidebar";
 
 // pages
-import Dashboard from '../../pages/dashboard';
-import Tables from '../../pages/tables';
-import Productos from '../../pages/productos/productos';
+import Dashboard from "../../pages/dashboard";
+import Tables from "../../pages/tables";
+import Productos from "../../pages/productos/productos";
 
 // context
-import { useLayoutState } from '../../context/LayoutContext';
-import Vendedores from '../../pages/vendedores/vendedores';
+import { useLayoutState } from "../../context/LayoutContext";
+import Vendedores from "../../pages/vendedores/vendedores";
 
 function Layout(props) {
   const classes = useStyles();
@@ -41,7 +39,11 @@ function Layout(props) {
             <Route path="/app/dashboard" component={Dashboard} />
             <Route path="/app/tables" component={Tables} />
             <Route path="/app/productos" component={Productos} />
-            <Route patch="app/vendedor" component={Vendedores} />
+            <Route path="/app/vendedores" component={Vendedores} />
+            <Route patch="app/clientes" component={null} />
+            <Route patch="app/modelo" component={null} />
+            <Route patch="app/familia" component={null} />
+            <Route patch="app/linea" component={null} />
           </Switch>
         </div>
       </>

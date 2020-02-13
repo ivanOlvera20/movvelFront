@@ -37,16 +37,16 @@ const structure = [
     icon: <CreateNewFolder />,
     children: [
       { label: 'Productos', link: '/app/productos', icon: <AccountTreeIcon /> },
-      { label: 'Clientes', link: '/app/ui/charts', icon: <AssignmentInd /> },
+      { label: 'Clientes', link: '/app/clientes', icon: <AssignmentInd /> },
       { label: 'Vendedores', link: '/app/vendedores', icon: <AssignmentInd /> },
       {
         label: 'Otros',
         link: '/app/ui',
         icon: <UIElementsIcon />,
         children: [
-          { label: 'Modelo', link: '/app/ui/icons' },
-          { label: 'Familia', link: '/app/ui/icons' },
-          { label: 'Linea', link: '/app/ui/icons' },
+          { label: 'Modelo', link: '/app/modelo' },
+          { label: 'Familia', link: '/app/familia' },
+          { label: 'Linea', link: '/app/linea' },
         ],
       },
     ],
