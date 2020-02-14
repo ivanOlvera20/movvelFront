@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Input } from '@material-ui/core';
+import {
+  Grid, Input, Collapse, Paper, TextField, Button,
+} from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
+import useStyles from './styles/styles';
 
 // components
 import PageTitle from '../../components/PageTitle/PageTitle';
@@ -26,6 +29,12 @@ const mapObject = (element) => ({
 });
 
 export default function Vendedores() {
+  const classes = useStyles();
+  const [newVendor, setVendorFields] = useState({
+    nombre: '',
+    comision: '',
+  });
+  const [collapsible, setCollapse] = useState(false);
   const [state, setState] = useState();
   const [editMode, setEdit] = useState(editInitialState);
   const [data, setData] = useState([]);
@@ -41,8 +50,59 @@ export default function Vendedores() {
   }, [fetch]);
   return (
     <>
-      <PageTitle title="Vendedores" button="Añadir vendedor" />
+      <PageTitle title="Vendedores" button="Añadir vendedor" onClick={() => setCollapse((prev) => !prev)} />
       <Grid container spacing={4}>
+        <Grid item xs={12}>
+          <Collapse in={collapsible}>
+            <Paper className={classes.newRow}>
+              <Grid container spacing={4}>
+                <Grid item>
+                  <TextField
+                    name="nombre"
+                    label="Nuevo Vendedor"
+                    variant="outlined"
+                    value={newVendor.nombre}
+                    onChange={(e) => setVendorFields((prev) => ({
+                      ...prev,
+                      [e.target.name]: e.target.value,
+                    }))}
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    name="comision"
+                    label="Comision"
+                    variant="outlined"
+                    value={newVendor.comision}
+                    onChange={(e) => setVendorFields((prev) => ({
+                      ...prev,
+                      [e.target.name]: e.target.value,
+                    }))}
+                  />
+                </Grid>
+                <Grid item xs={6} container>
+                  <Button
+                    style={{ height: '100%' }}
+                    variant="outlined"
+                    onClick={() => post(newVendor)
+                      .then(() => {
+                        refetch();
+                      })
+                      .then(() => {
+                        setVendorFields({
+                          nombre: '',
+                          comision: '',
+                        });
+                        setCollapse(false);
+                      })}
+                  >
+                    Añadir
+                  </Button>
+                </Grid>
+              </Grid>
+            </Paper>
+          </Collapse>
+        </Grid>
         <Grid item xs={12}>
           <MUIDataTable
             data={data}

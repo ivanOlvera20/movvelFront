@@ -16,7 +16,7 @@ export default function PageTitle(props) {
         {props.title}
       </Typography>
       {props.button && (
-        <Button>
+        <Button onClick={props.onClick}>
           {props.button}
         </Button>
       )}
