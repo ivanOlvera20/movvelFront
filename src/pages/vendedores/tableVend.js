@@ -1,51 +1,53 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-import MUIDataTable from "mui-datatables";
+import MUIDataTable from 'mui-datatables';
 
+const getVend = (setState) => {
+  axios
+    .get('https://movvel-olveraconsultores.herokuapp.com/api/vendedor')
+    .then((data) => {
+      setState(data.data);
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
+};
 function TableVend() {
   const [stateVend, setVendState] = useState([]);
 
-  const getVend = () => {
-    axios
-      .get("https://movvel-olveraconsultores.herokuapp.com/api/vendedor")
-      .then(data => {
-        setVendState(data.data);
-      })
-      .catch(err => alert(err));
-  };
 
   useEffect(() => {
-    getVend();
+    getVend(setVendState);
   }, []);
 
   const columns = [
     {
-      name: "clave",
-      label: "Clave",
+      name: 'clave',
+      label: 'Clave',
       options: {
         filter: false,
         sort: true,
       },
     },
     {
-      name: "nombre",
-      label: "Nombre",
+      name: 'nombre',
+      label: 'Nombre',
       options: {
         filter: true,
         sort: true,
       },
     },
     {
-      name: "comision",
-      label: "Comision",
+      name: 'comision',
+      label: 'Comision',
       options: {
         filter: true,
         sort: true,
       },
     },
     {
-      name: "Opciones",
+      name: 'Opciones',
       options: {
         filter: false,
         sort: false,
@@ -66,17 +68,17 @@ function TableVend() {
   ];
 
   const options = {
-    filterType: "checkbox",
+    filterType: 'checkbox',
     downloadOptions: {
-      filename: "vendedores.csv",
+      filename: 'vendedores.csv',
     },
-    selectableRows: "none",
+    selectableRows: 'none',
     onTableChange: () => {
       getVend();
     },
   };
 
-  const data = stateVend.map(d => [d.clave, d.nombre, d.comision]);
+  const data = stateVend.map((d) => [d.clave, d.nombre, d.comision]);
 
   return (
     <div>

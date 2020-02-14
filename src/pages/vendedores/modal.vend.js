@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import { InputAdornment } from "@material-ui/core";
+import React, { useState } from 'react';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { InputAdornment } from '@material-ui/core';
 import {
   PermIdentityOutlined,
   MonetizationOnOutlined,
-} from "@material-ui/icons";
-import Axios from "axios";
+} from '@material-ui/icons';
+import Axios from 'axios';
 
 export default function ModalVend() {
   const [open, setOpen] = React.useState(false);
@@ -21,17 +21,17 @@ export default function ModalVend() {
     setOpen(false);
   };
 
-  const url = "https://movvel-olveraconsultores.herokuapp.com/api/vendedor";
+  const url = 'https://movvel-olveraconsultores.herokuapp.com/api/vendedor';
 
   const [data, setData] = useState({
-    clave: "",
-    nombre: "",
-    comision: "",
+    clave: '',
+    nombre: '',
+    comision: '',
   });
 
   function submit(e) {
     e.preventDefault();
-    Axios.post(url, data).then(res => {
+    Axios.post(url, data).then((res) => {
       console.log(res.data);
     });
   }
@@ -65,7 +65,7 @@ export default function ModalVend() {
           Añade un nuevo vendedor
         </DialogTitle>
         <DialogContent>
-          <form onSubmit={e => submit(e)}>
+          <form onSubmit={(e) => submit(e)}>
             <TextField
               name="clave"
               id="clave"
@@ -83,7 +83,7 @@ export default function ModalVend() {
                   </InputAdornment>
                 ),
               }}
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
             />
             <TextField
               name="nombre"
@@ -101,7 +101,7 @@ export default function ModalVend() {
                   </InputAdornment>
                 ),
               }}
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
               value={data.nombre}
             />
             <TextField
@@ -120,7 +120,7 @@ export default function ModalVend() {
                   </InputAdornment>
                 ),
               }}
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
               value={data.comision}
             />
             <Button type="submit" color="primary" onClick={handleClose}>
