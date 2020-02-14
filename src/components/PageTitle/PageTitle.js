@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
 
 // styles
 import useStyles from './styles';
@@ -15,11 +14,6 @@ export default function PageTitle(props) {
       <Typography className={classes.typo} variant="h1" size="sm">
         {props.title}
       </Typography>
-      {props.button && (
-        <Button>
-          {props.button}
-        </Button>
-      )}
     </div>
   );
 }
