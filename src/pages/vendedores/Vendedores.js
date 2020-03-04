@@ -84,6 +84,7 @@ export default function Vendedores() {
                   <Button
                     style={{ height: '100%' }}
                     variant="outlined"
+                    color="primary"
                     onClick={() => post(newVendor)
                       .then(() => {
                         refetch();

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -7,98 +7,98 @@ import {
   Menu,
   MenuItem,
   Fab,
-} from "@material-ui/core";
+} from '@material-ui/core';
 import {
   Menu as MenuIcon,
   Person as AccountIcon,
   Search as SearchIcon,
   Send as SendIcon,
   ArrowBack as ArrowBackIcon,
-} from "@material-ui/icons";
-import classNames from "classnames";
+} from '@material-ui/icons';
+import classNames from 'classnames';
 
 // styles
-import useStyles from "./styles";
+import useStyles from './styles';
 
 // components
-import { Typography } from "../Wrappers/Wrappers";
-import Notification from "../Notification/Notification";
-import UserAvatar from "../UserAvatar/UserAvatar";
+import { Typography } from '../Wrappers/Wrappers';
+import Notification from '../Notification/Notification';
+import UserAvatar from '../UserAvatar/UserAvatar';
 
 // context
 import {
   useLayoutState,
   useLayoutDispatch,
   toggleSidebar,
-} from "../../context/LayoutContext";
-import { useUserDispatch, signOut } from "../../context/UserContext";
+} from '../../context/LayoutContext';
+import { useUserDispatch, signOut } from '../../context/UserContext';
 
 const messages = [
   {
     id: 0,
-    variant: "warning",
-    name: "Jane Hew",
-    message: "Hey! How is it going?",
-    time: "9:32",
+    variant: 'warning',
+    name: 'Jane Hew',
+    message: 'Hey! How is it going?',
+    time: '9:32',
   },
   {
     id: 1,
-    variant: "success",
-    name: "Lloyd Brown",
-    message: "Check out my new Dashboard",
-    time: "9:18",
+    variant: 'success',
+    name: 'Lloyd Brown',
+    message: 'Check out my new Dashboard',
+    time: '9:18',
   },
   {
     id: 2,
-    variant: "primary",
-    name: "Mark Winstein",
-    message: "I want rearrange the appointment",
-    time: "9:15",
+    variant: 'primary',
+    name: 'Mark Winstein',
+    message: 'I want rearrange the appointment',
+    time: '9:15',
   },
   {
     id: 3,
-    variant: "secondary",
-    name: "Liana Dutti",
-    message: "Good news from sale department",
-    time: "9:09",
+    variant: 'secondary',
+    name: 'Liana Dutti',
+    message: 'Good news from sale department',
+    time: '9:09',
   },
 ];
 
 const notifications = [
-  { id: 0, color: "warning", message: "Check out this awesome ticket" },
+  { id: 0, color: 'warning', message: 'Check out this awesome ticket' },
   {
     id: 1,
-    color: "success",
-    type: "info",
-    message: "What is the best way to get ...",
+    color: 'success',
+    type: 'info',
+    message: 'What is the best way to get ...',
   },
   {
     id: 2,
-    color: "secondary",
-    type: "notification",
-    message: "This is just a simple notification",
+    color: 'secondary',
+    type: 'notification',
+    message: 'This is just a simple notification',
   },
   {
     id: 3,
-    color: "primary",
-    type: "e-commerce",
-    message: "12 new orders has arrived today",
+    color: 'primary',
+    type: 'e-commerce',
+    message: '12 new orders has arrived today',
   },
 ];
 
 export default function Header(props) {
-  var classes = useStyles();
+  const classes = useStyles();
 
   // global
-  var layoutState = useLayoutState();
-  var layoutDispatch = useLayoutDispatch();
-  var userDispatch = useUserDispatch();
+  const layoutState = useLayoutState();
+  const layoutDispatch = useLayoutDispatch();
+  const userDispatch = useUserDispatch();
 
   // local
-  var [mailMenu, setMailMenu] = useState(null);
-  var [notificationsMenu, setNotificationsMenu] = useState(null);
-  var [profileMenu, setProfileMenu] = useState(null);
-  var [isSearchOpen, setSearchOpen] = useState(false);
+  const [mailMenu, setMailMenu] = useState(null);
+  const [notificationsMenu, setNotificationsMenu] = useState(null);
+  const [profileMenu, setProfileMenu] = useState(null);
+  const [isSearchOpen, setSearchOpen] = useState(false);
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -132,7 +132,7 @@ export default function Header(props) {
           )}
         </IconButton>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
-          Movvel
+          Diseños Movvel
         </Typography>
         <div className={classes.grow} />
         <div
@@ -161,7 +161,7 @@ export default function Header(props) {
           color="inherit"
           className={classes.headerMenuButton}
           aria-controls="profile-menu"
-          onClick={e => setProfileMenu(e.currentTarget)}
+          onClick={(e) => setProfileMenu(e.currentTarget)}
         >
           <AccountIcon classes={{ root: classes.headerIcon }} />
         </IconButton>
@@ -184,10 +184,12 @@ export default function Header(props) {
               component="a"
               color="secondary"
             >
-              {messages.length} New Messages
+              {messages.length}
+              {' '}
+              New Messages
             </Typography>
           </div>
-          {messages.map(message => (
+          {messages.map((message) => (
             <MenuItem key={message.id} className={classes.messageNotification}>
               <div className={classes.messageNotificationSide}>
                 <UserAvatar color={message.variant} name={message.name} />
@@ -228,7 +230,7 @@ export default function Header(props) {
           className={classes.headerMenu}
           disableAutoFocusItem
         >
-          {notifications.map(notification => (
+          {notifications.map((notification) => (
             <MenuItem
               key={notification.id}
               onClick={() => setNotificationsMenu(null)}

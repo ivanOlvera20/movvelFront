@@ -40,4 +40,14 @@ export default class FetchAPI {
       return e;
     }
   }
+
+  async getOne(id) {
+    try {
+      const response = await axios.get(`${this.path}/${id}`);
+      return response;
+    } catch (e) {
+      return e;
+    }
+  }
+  
 }

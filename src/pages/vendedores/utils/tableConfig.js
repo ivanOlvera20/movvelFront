@@ -37,6 +37,7 @@ const columns = [
     label: 'Opciones',
     options: {
       empty: true,
+      filter: false,
     },
   },
 ];

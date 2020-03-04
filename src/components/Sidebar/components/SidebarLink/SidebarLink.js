@@ -15,8 +15,6 @@ import classnames from 'classnames';
 // styles
 import useStyles from './styles';
 
-// components
-import Dot from '../Dot';
 
 export default function SidebarLink({
   link,
@@ -59,7 +57,7 @@ export default function SidebarLink({
         classes={{
           root: classnames(classes.linkRoot, {
             [classes.linkActive]: isLinkActive && !nested,
-            [classes.linkNested]: nested,
+
           }),
         }}
         disableRipple
@@ -69,7 +67,7 @@ export default function SidebarLink({
             [classes.linkIconActive]: isLinkActive,
           })}
         >
-          {nested ? <Dot color={isLinkActive && 'primary'} /> : icon}
+          {nested ? icon : icon}
         </ListItemIcon>
         <ListItemText
           classes={{

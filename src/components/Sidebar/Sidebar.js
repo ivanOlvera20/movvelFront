@@ -3,11 +3,15 @@ import { Drawer, IconButton, List } from '@material-ui/core';
 import {
   Home as HomeIcon,
   FilterNone as UIElementsIcon,
-  BorderAll as TableIcon,
   ArrowBack as ArrowBackIcon,
-  AssignmentInd,
   CreateNewFolder,
+  AccountCircle,
+  PeopleAltOutlined,
+  BuildOutlined,
+  ViewModule,
+  ArrowRight,
 } from '@material-ui/icons';
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import { useTheme } from '@material-ui/styles';
 import { withRouter } from 'react-router-dom';
@@ -28,34 +32,81 @@ import {
 
 const structure = [
   {
-    id: 0, label: 'Dashboard', link: '/app/dashboard', icon: <HomeIcon />,
+    id: 0,
+    label: 'Dashboard',
+    link: '/app/dashboard',
+    icon: <HomeIcon />,
   },
   {
     id: 1,
     label: 'Catalogos',
-    link: '/app/ui/icons',
     icon: <CreateNewFolder />,
     children: [
-      { label: 'Productos', link: '/app/productos', icon: <AccountTreeIcon /> },
-      { label: 'Clientes', link: '/app/clientes', icon: <AssignmentInd /> },
-      { label: 'Vendedores', link: '/app/vendedores', icon: <AssignmentInd /> },
       {
+        label: 'Clientes',
+        icon: <PeopleAltOutlined />,
+        children: [
+          {
+            label: 'Agregar Cliente',
+            link: '/app/clientes',
+            icon: <PlaylistAddIcon />,
+          },
+        ],
+      },
+
+      {
+        id: 2,
+        label: 'Vendedores',
+        icon: <AccountCircle />,
+        children: [
+          {
+            label: 'Agregar Vendedor',
+            link: '/app/vendedores',
+            icon: <PlaylistAddIcon />,
+          },
+        ],
+      },
+
+      {
+        id: 3,
+        label: 'Productos',
+        icon: <AccountTreeIcon />,
+        children: [
+          {
+            label: 'Agregar Producto',
+            link: '/app/productos',
+            icon: <PlaylistAddIcon />,
+          },
+          { label: 'Modelo', link: '/app/modelos', icon: <ViewModule /> },
+          { label: 'Familia', link: '/app/familia', icon: <ViewModule /> },
+          { label: 'Linea', link: '/app/linea', icon: <ViewModule /> },
+        ],
+      },
+      {
+        id: 4,
+        label: 'Materias Prima',
+        icon: <BuildOutlined />,
+        children: [
+          {
+            label: 'Agregar MP',
+            link: '/app/mat_prima',
+            icon: <PlaylistAddIcon />,
+          },
+          { label: 'Tipo', link: '/app/mat_consumo', icon: <ViewModule /> },
+        ],
+      },
+      {
+        id: 5,
         label: 'Otros',
-        link: '/app/ui',
         icon: <UIElementsIcon />,
         children: [
-          { label: 'Modelo', link: '/app/modelo' },
-          { label: 'Familia', link: '/app/familia' },
-          { label: 'Linea', link: '/app/linea' },
+          { label: 'Identificador', link: '/app/iden', icon: <ArrowRight /> },
+          { label: 'Bancos', link: '/app/banco', icon: <ArrowRight /> },
+          { label: 'Usos de CFDI', link: '/app/cfdi', icon: <ArrowRight /> },
         ],
       },
     ],
   },
-  {
-    id: 3, label: 'Tables', link: '/app/tables', icon: <TableIcon />,
-  },
-
-  { id: 4, type: 'divider' },
 ];
 
 function Sidebar({ location }) {
