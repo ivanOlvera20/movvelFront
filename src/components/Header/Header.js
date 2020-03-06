@@ -131,8 +131,8 @@ export default function Header(props) {
             />
           )}
         </IconButton>
-        <Typography variant="h6" weight="medium" className={classes.logotype}>
-          Movvel
+        <Typography variant="h2" weight="medium" className={classes.logotype}>
+          Medi Renta©
         </Typography>
         <div className={classes.grow} />
         <div

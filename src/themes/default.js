@@ -1,7 +1,7 @@
 import tinycolor from "tinycolor2";
 
-const primary = "#6685d8";
-const secondary = "#FF5C93";
+const primary = "#f2466e";
+const secondary = "#002dd1";
 const warning = "#FFC260";
 const success = "#3CD4A0";
 const info = "#9013FE";
@@ -103,7 +103,7 @@ export default {
       },
       button: {
         "&:hover, &:focus": {
-          backgroundColor: "#F3F5FF",
+          backgroundColor: "#B9B9B9",
         },
       },
     },

@@ -8,7 +8,7 @@ export default makeStyles(theme => ({
   newRow1: {
     padding: theme.spacing(2),
     width: "100%",
-    backgroundColor: "#99e0d6",
+    backgroundColor: "#f2688b",
   },
   root: {
     "& > *": {

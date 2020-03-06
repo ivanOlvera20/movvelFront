@@ -2,10 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Drawer, IconButton, List } from '@material-ui/core';
 import {
   Home as HomeIcon,
-  BorderAll as TableIcon,
   ArrowBack as ArrowBackIcon,
-  CreateNewFolder,
-} from '@material-ui/icons';
+  AccountBox,
+  Accessibility,
+  LocalHospital,
+  AttachMoney,
+  LocalShipping,
+  HomeWork,
+  Ballot,
+} from "@material-ui/icons";
 import { useTheme } from '@material-ui/styles';
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
@@ -31,25 +36,25 @@ const structure = [
     id: 1,
     label: 'Clientes',
     link: '/app/clientes',
-    icon: <CreateNewFolder />,
+    icon: <AccountBox />,
   },
   {
-    id: 2, label: 'Empleados', link: '/app/empleados', icon: <TableIcon />,
+    id: 2, label: 'Empleados', link: '/app/empleados', icon: <Accessibility/>,
   },
   {
-    id: 3, label: 'Productos', link: '/app/productos', icon: <TableIcon />,
+    id: 3, label: 'Productos', link: '/app/productos', icon: <LocalHospital />,
   },
   {
-    id: 4, label: 'Venta', link: '/app/remision', icon: <TableIcon />,
+    id: 4, label: 'Venta', link: '/app/remision', icon: <AttachMoney />,
   },
   {
-    id: 5, label: 'Proveedores', link: '/app/proveedor', icon: <TableIcon />,
+    id: 5, label: 'Proveedores', link: '/app/proveedor', icon: <LocalShipping />,
   },
   {
-    id: 5, label: 'Bodega', link: '/app/bodega', icon: <TableIcon />,
+    id: 6, label: 'Bodega', link: '/app/bodega', icon: <HomeWork />,
   },
   {
-    id: 5, label: 'Contrato', link: '/app/contrato', icon: <TableIcon />,
+    id: 7, label: 'Contrato', link: '/app/contrato', icon: <Ballot />,
   },
 ];
 

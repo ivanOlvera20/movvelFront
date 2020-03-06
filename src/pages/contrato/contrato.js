@@ -121,7 +121,7 @@ export default function Contrato() {
     if (fetch !== undefined) {
       setData(fetch.data.map(element => mapObject(element)));
     }
-    if (fetchEmp !== undefined) {
+    if (fetchCli !== undefined) {
       setDataCli(fetchCli.data.map(element => mapCli(element)));
     }
     if (fetchEmp !== undefined) {
@@ -157,24 +157,89 @@ export default function Contrato() {
   };
 
   const jsPdfGenerador = () => {
+    // Use of Date.now() function
+    var d = Date(Date.now());
+
+    // Converting the number of millisecond in date string
+    const a = d.toString();
+
     const doc = new jsPDF("p", "pt");
 
     doc.setFontSize(50);
-    doc.text(50, 100, "Medi Renta");
+    doc.setFontStyle("Roboto");
+    doc.setTextColor("Red");
+    doc.text(50, 75, "Medi Renta");
 
-    doc.setFontSize(20);
+    doc.setTextColor("Black");
+    doc.setFontSize(10);
+
+    doc.text(50, 100, "ALQUILER Y VENTA DE EQUIPOS DE REHABILITACION");
+    doc.text(
+      50,
+      110,
+      "Av. Lopez Mateos Norte No.59-7A Col. Vallarta Norte C.P. 44690, GDL, Jalisco",
+    );
+    doc.text(50, 120, "Tel. 01 (33) 3188-0052  -   Web: www.medirenta.com.mx");
     doc.setFontStyle("Italic");
 
-    doc.text(50, 150, "Contrato de Venta");
+    doc.setFontSize(25);
+    doc.text(50, 150, "Contrato de Servicio");
 
-    doc.text(50, 250, "Cantidad: ");
-    doc.text(200, 250, `${newPro.cantidad}`);
+    doc.setFontSize(10);
+    doc.text(300, 150, `${a}`);
 
-    doc.text(50, 300, "Precio de Renta: ");
-    doc.text(200, 300, `${newPro.precioRenta}`);
+    doc.text(50, 200, "Nombre del Cliente : ");
+    doc.text(200, 200, `${newPro.nombreCliente}`);
 
-    doc.text(50, 350, "Total: ");
-    doc.text(200, 350, `${newPro.cantidad * newPro.precioRenta}`);
+    doc.text(250, 200, "Numero de Remision : ");
+    doc.text(400, 200, `${newPro.remision}`);
+
+    doc.text(50, 220, "Tipo de Servicio : ");
+    doc.text(200, 220, `${newPro.tipoServicio}`);
+
+    doc.text(50, 240, "Producto : ");
+    doc.text(200, 240, `${newPro.producto}`);
+
+    doc.text(50, 260, "Fecha de Pedido : ");
+    doc.text(200, 260, `${newPro.fechaPedido}`);
+
+    doc.text(50, 280, "Fecha Inicial : ");
+    doc.text(200, 280, `${newPro.fechaInicial}`);
+
+    doc.text(50, 300, "Fecha Final : ");
+    doc.text(200, 300, `${newPro.fechaFinal}`);
+
+    doc.text(50, 320, "Atendio : ");
+    doc.text(200, 320, `${newPro.atendio}`);
+
+    doc.text(50, 340, "Entrego : ");
+    doc.text(200, 340, `${newPro.entrego}`);
+
+    doc.text(50, 360, "Unidad : ");
+    doc.text(200, 360, `${newPro.unidad}`);
+
+    doc.text(50, 380, "Cantidad : ");
+    doc.text(200, 380, `${newPro.cantidad}`);
+
+    doc.text(50, 400, "Precio Unitario : ");
+    doc.text(200, 400, `${newPro.precioUnitario}`);
+
+    doc.setFontSize(28);
+    doc.text(50, 450, "Total : ");
+    doc.text(200, 450, `${newPro.cantidad * newPro.precioUnitario}`);
+
+    doc.setFontSize(25);
+    doc.text(50, 550, "Notas Importantes");
+    doc.setFontSize(10);
+    doc.text(50, 600, "1-. Si requiere recoleccion del equipo antes del vencimiento, favor de solicitarlo por telefono para programar su servicio");
+    doc.text(50, 615, "2-. Los pagos de la renta mensual de realizaran por adelantado");
+    doc.text(50, 630, "3-. Dejando un pagaré por el equipo en renta(El pagaré sera devuelto vontra entrega del equipo en buen estado)");
+
+
+    doc.text(50, 680, "Fecha y hora de llegada: ______________________________________________________________");
+    doc.text(50, 750, "Nombre y firma de quien recibe: ______________________________________________________________");
+
+
 
     doc.save("contrato.pdf");
   };
@@ -203,7 +268,7 @@ export default function Contrato() {
                     name="nombreCliente"
                     fullWidth
                     label="Nombre del Cliente"
-                    value={newPro.familia}
+                    value={newPro.nombreCliente}
                     onChange={e =>
                       setProFields(prev => ({
                         ...prev,
@@ -255,7 +320,7 @@ export default function Contrato() {
                     fullWidth
                     label="Quien Atiende"
                     helperText="seleccione el nombre del cliente que ya esta en su base de datos"
-                    value={newPro.familia}
+                    value={newPro.atendio}
                     onChange={e =>
                       setProFields(prev => ({
                         ...prev,
@@ -279,7 +344,7 @@ export default function Contrato() {
                     fullWidth
                     label="Quien Entrega"
                     helperText="seleccione el nombre del cliente que ya esta en su base de datos"
-                    value={newPro.familia}
+                    value={newPro.entrego}
                     onChange={e =>
                       setProFields(prev => ({
                         ...prev,

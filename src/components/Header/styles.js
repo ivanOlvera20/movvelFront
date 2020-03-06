@@ -6,6 +6,7 @@ export default makeStyles(theme => ({
     color: "white",
     marginLeft: theme.spacing(2.5),
     marginRight: theme.spacing(2.5),
+    fontFamily: "Roboto",
     fontWeight: 500,
     fontSize: 18,
     whiteSpace: "nowrap",
