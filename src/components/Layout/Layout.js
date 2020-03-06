@@ -11,12 +11,16 @@ import Sidebar from "../Sidebar";
 
 // pages
 import Dashboard from "../../pages/dashboard";
-import Tables from "../../pages/tables";
 import Productos from "../../pages/productos/productos";
 
 // context
 import { useLayoutState } from "../../context/LayoutContext";
-import Vendedores from "../../pages/vendedores/vendedores";
+import Clientes from "../../pages/clientes/clientes";
+import Empleados from "../../pages/empleados/empleados";
+import Remision from "../../pages/remision/remision";
+import Proveedor from "../../pages/proveedor/proveedor";
+import Bodega from "../../pages/bodega/bodega";
+import Contrato from "../../pages/contrato/contrato";
 
 function Layout(props) {
   const classes = useStyles();
@@ -37,13 +41,13 @@ function Layout(props) {
           <div className={classes.fakeToolbar} />
           <Switch>
             <Route path="/app/dashboard" component={Dashboard} />
-            <Route path="/app/tables" component={Tables} />
             <Route path="/app/productos" component={Productos} />
-            <Route path="/app/vendedores" component={Vendedores} />
-            <Route patch="app/clientes" component={null} />
-            <Route patch="app/modelo" component={null} />
-            <Route patch="app/familia" component={null} />
-            <Route patch="app/linea" component={null} />
+            <Route path="/app/clientes" component={Clientes} />
+            <Route path="/app/empleados" component={Empleados} />
+            <Route path="/app/remision" component={Remision} />
+            <Route path="/app/proveedor" component={Proveedor} />
+            <Route path="/app/bodega" component={Bodega} />
+            <Route path="/app/contrato" component={Contrato} />
           </Switch>
         </div>
       </>

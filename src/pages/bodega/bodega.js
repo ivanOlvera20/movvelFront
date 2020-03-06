@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import {
   Grid,
-  Input,
   Collapse,
   Paper,
   TextField,
   Button,
   Typography,
+  MenuItem,
+  Input
+
 } from "@material-ui/core";
 import MUIDataTable from "mui-datatables";
 import useStyles from "./styles/styles";
@@ -14,6 +16,7 @@ import useStyles from "./styles/styles";
 // components
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { columns, options } from "./utils/tableConfig";
+import ButtonAdd from './components/ButtonAdd'
 import useGet from "../../API/hooks/useGet";
 import ButtonSet from "./components/ButtonSet";
 import usePost from "../../API/hooks/usePost";
@@ -30,90 +33,161 @@ const mapObject = element => ({
   // eslint-disable-next-line no-underscore-dangle
   id: element._id,
   clave: element.clave,
-  descripcion: element.descripcion,
-  precio: element.precio,
+  producto: element.producto.descripcion,
+  cantidad: element.cantidad,
+  costo: element.costo,
+  observacion: element.observacion
 });
 
-export default function Productos() {
+const mapPro = element => ({
+  // eslint-disable-next-line no-underscore-dangle
+  id: element._id,
+  descripcion: element.descripcion
+});
+
+export default function Bodega() {
   const classes = useStyles();
-  const [newPro, setProFields] = useState({
-    descripcion: "",
+  const [newCli, setCliFields] = useState({
+    clave: "",
+    producto: '',
+    cantidad: '',
+    costo: '',
+    observacion: '',
   });
 
   const [collapsible, setCollapse] = useState(false);
   const [state, setState] = useState();
   const [editMode, setEdit] = useState(editInitialState);
   const [data, setData] = useState([]);
-  const [fetch, refetch] = useGet("/productos");
-  const [put] = usePut("/productos");
-  const [del] = useDelete("/productos");
-  const [post] = usePost("/productos");
+  const [dataPro, setDataPro] = useState([]);
+  const [fetch, refetch] = useGet("/bodega");
+  const [fetchPro] = useGet("/productos");
+  const [put] = usePut("/bodega");
+  const [del] = useDelete("/bodega");
+  const [post] = usePost("/bodega");
 
   useEffect(() => {
     if (fetch !== undefined) {
       setData(fetch.data.map(element => mapObject(element)));
     }
-  }, [fetch]);
+    if (fetchPro !== undefined) {
+      setDataPro(fetchPro.data.map(element => mapPro(element)));
+    }
+  }, [fetch, fetchPro]);
 
-  const close = () => {
-    setProFields({
-      descripcion: "",
+  const limpiar = () => {
+    setCliFields({
+      clave: "",
+      producto: "",
+      cantidad: "",
+      costo: "",
+      observacion: "",
     });
   };
 
   return (
     <>
       <PageTitle
-        title="Productos"
-        button="Añadir Producto"
+        title="Bodega"
+        button="Añadir Producto a Bodega"
         onClick={() => setCollapse(prev => !prev)}
       />
       <Grid container spacing={4}>
         <Grid item xs={12}>
           <Collapse in={collapsible}>
             <Paper className={classes.newRow}>
-              <Grid container spacing={4}>
+              <Grid container spacing={3}>
                 <Paper className={classes.newRow1}>
                   <Grid item xs={12}>
-                    <Typography variant="h4">Caracteristicas</Typography>
+                    <Typography variant="h4">Detalles</Typography>
                   </Grid>
                 </Paper>
-                <Grid item xs={6}>
+                <Grid item xs={12}>
                   <TextField
                     required
-                    name="descripcion"
+                    select
+                    name="producto"
                     fullWidth
-                    label="Descripcion del producto"
+                    label="Producto"
                     variant="outlined"
-                    value={newPro.descripcion}
+                    value={newCli.producto}
                     onChange={e =>
-                      setProFields(prev => ({
+                      setCliFields(prev => ({
                         ...prev,
                         [e.target.name]: e.target.value,
                       }))
                     }
-                  />
+                  >
+                    {dataPro.map(option => (
+                      <MenuItem key={option.id} value={option.id}>
+                        {option.descripcion}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    name="cantidad"
+                    fullWidth
+                    label="Cantidad"
+                    variant="outlined"
+                    value={newCli.cantidad}
+                    onChange={e =>
+                      setCliFields(prev => ({
+                        ...prev,
+                        [e.target.name]: e.target.value,
+                      }))
+                    }
+                  >
+                  </TextField>
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    name="costo"
+                    fullWidth
+                    label="Costo"
+                    variant="outlined"
+                    value={newCli.costo}
+                    onChange={e =>
+                      setCliFields(prev => ({
+                        ...prev,
+                        [e.target.name]: e.target.value,
+                      }))
+                    }
+                  >
+                  </TextField>
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="observacion"
+                    fullWidth
+                    label="Observación"
+                    variant="outlined"
+                    value={newCli.observacion}
+                    onChange={e =>
+                      setCliFields(prev => ({
+                        ...prev,
+                        [e.target.name]: e.target.value,
+                      }))
+                    }
+                  >
+                  </TextField>
                 </Grid>
               </Grid>
               <Grid container spacing={6}>
                 <Grid item xs={4}>
-                  <Button
-                    variant="outlined"
-                    size="large"
-                    color="primary"
+                  <ButtonAdd
                     onClick={() =>
-                      post(newPro)
+                      post(newCli)
                         .then(() => {
                           refetch();
                         })
                         .then(() => {
-                          close();
+                          limpiar();
                           setCollapse(false);
                         })
                     }
-                  >
-                    Añadir Producto
-                  </Button>
+                  ></ButtonAdd>
                 </Grid>
                 <Grid item xs={4}>
                   <Button
@@ -121,7 +195,7 @@ export default function Productos() {
                     size="large"
                     color="primary"
                     onClick={() => {
-                      close();
+                      limpiar();
                     }}
                   >
                     Limpiar
@@ -133,7 +207,7 @@ export default function Productos() {
                     size="large"
                     color="secondary"
                     onClick={() => {
-                      close();
+                      limpiar();
                       setCollapse(false);
                     }}
                   >
@@ -187,8 +261,9 @@ export default function Productos() {
                       edit={() => {
                         setState({
                           clave: tableMeta.rowData[0],
-                          descripcion: tableMeta.rowData[1],
-                          precio: tableMeta.rowData[2],
+                          producto: tableMeta.rowData[1],
+                          celular: tableMeta.rowData[2],
+                          correo: tableMeta.rowData[3],
                         });
                         setEdit({
                           status: true,
